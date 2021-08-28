@@ -6,7 +6,7 @@
 /*   By: tschmitt <tschmitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 17:00:17 by tschmitt          #+#    #+#             */
-/*   Updated: 2021/08/28 17:05:15 by tschmitt         ###   ########.fr       */
+/*   Updated: 2021/08/28 19:12:28 by tschmitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 # define CLIENT_H
 
 # include "libft.h"
+# include <signal.h>
 
 #endif

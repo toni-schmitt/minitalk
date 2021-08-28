@@ -6,7 +6,7 @@
 /*   By: tschmitt <tschmitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 17:00:20 by tschmitt          #+#    #+#             */
-/*   Updated: 2021/08/28 17:04:58 by tschmitt         ###   ########.fr       */
+/*   Updated: 2021/08/28 20:54:16 by tschmitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,12 @@
 # define SERVER_H
 
 # include "libft.h"
+# include <signal.h>
+
+typedef struct s_message
+{
+	unsigned char	c;
+	int				mask;
+}	t_message;
 
 #endif
