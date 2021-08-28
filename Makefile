@@ -42,20 +42,26 @@ all: $(CLIENT_NAME) $(SERVER_NAME)
 	@echo $(G)Finished...$(X)
 
 $(LIBFT_NAME):
-	@make -C $(LIBFT_PATH)
 	@echo $(Y)Compiling [$(LIBFT_NAME)]...$(X)
+	@make -C $(LIBFT_PATH)
+	@printf $(UP)$(CUT)
+	@echo $(G)Finished [$(LIBFT_NAME)]$(X)
 
 $(CLIENT_NAME): $(CLIENT_OBJ) $(LIBFT_NAME)
-	@$(CC) $(CCFLAGS) $(INCLUDE_FLAGS) $(CLIENT_OBJ) $(LIBFT_NAME) -o $(CLIENT_NAME)
 	@echo $(Y)Compiling [$(CLIENT_NAME)]...$(X)
+	@$(CC) $(CCFLAGS) $(INCLUDE_FLAGS) $(CLIENT_OBJ) $(LIBFT_NAME) -o $(CLIENT_NAME)
+	@echo $(G)Finished [$(CLIENT_NAME)]$(X)
 
 $(SERVER_NAME): $(SERVER_OBJ) $(LIBFT_NAME)
-	@$(CC) $(CCFLAGS) $(INCLUDE_FLAGS) $(SERVER_OBJ) $(LIBFT_NAME) -o $(SERVER_NAME)
 	@echo $(Y)Compiling [$(SERVER_NAME)]...$(X)
+	@$(CC) $(CCFLAGS) $(INCLUDE_FLAGS) $(SERVER_OBJ) $(LIBFT_NAME) -o $(SERVER_NAME)
+	@echo $(G)Finished [$(SERVER_NAME)]$(X)
 
 %.o: %.c
 	@echo $(Y)Compiling [$@]...$(X)
 	@$(CC) $(CCFLAGS) $(INCLUDE_FLAGS) -o $@ -c $<
+	@printf $(UP)$(CUT)
+	@echo $(G)Finished [$@]$(X)
 	@printf $(UP)$(CUT)
 
 clean:
