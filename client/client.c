@@ -6,7 +6,7 @@
 /*   By: tschmitt <tschmitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 17:00:04 by tschmitt          #+#    #+#             */
-/*   Updated: 2021/08/28 21:08:21 by tschmitt         ###   ########.fr       */
+/*   Updated: 2021/08/28 21:50:32 by tschmitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	send_message(int pid, char *message)
 		usleep(50);
 		message++;
 	}
+	send_char(SIG_STOP, pid);
 }
 
 int	main(int argc, char *argv[])
@@ -53,6 +54,5 @@ int	main(int argc, char *argv[])
 	message = argv[2];
 	send_message(server_pid, message);
 	usleep(50);
-	kill(server_pid, SIGTERM);
 	return (EXIT_SUCCESS);
 }

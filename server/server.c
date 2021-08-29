@@ -6,7 +6,7 @@
 /*   By: tschmitt <tschmitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 17:00:06 by tschmitt          #+#    #+#             */
-/*   Updated: 2021/08/28 21:06:01 by tschmitt         ###   ########.fr       */
+/*   Updated: 2021/08/29 15:05:09 by tschmitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,35 @@
 
 t_message	g_msg;
 
-void	high_bit(int pid)
+void	high_bit(int sig)
 {
-	(void)pid;
+	(void)sig;
 	g_msg.c = g_msg.c | g_msg.mask;
 	g_msg.mask /= 2;
+	g_msg.byte_count++;
 }
 
-void	low_bit(int pid)
+void	low_bit(int sig)
 {
-	(void)pid;
+	(void)sig;
 	g_msg.mask /= 2;
+	g_msg.byte_count++;
 }
 
-void	char_recieved(int pid)
+void	char_recieved(void)
 {
-	(void)pid;
 	ft_printf("%c", g_msg.c);
 	g_msg.c = 0;
 	g_msg.mask = 128;
+	g_msg.byte_count = 0;
 }
 
-void	complete(int pid)
+void	complete(void)
 {
-	(void)pid;
 	ft_printf("\n");
-	exit(EXIT_SUCCESS);
+	g_msg.c = 0;
+	g_msg.mask = 128;
+	g_msg.byte_count = 0;
 }
 
 int	main(void)
@@ -50,12 +53,15 @@ int	main(void)
 	ft_printf("%i\n", pid);
 	g_msg.c = 0;
 	g_msg.mask = 128;
+	g_msg.byte_count = 0;
 	while (1)
 	{
 		signal(SIGUSR1, high_bit);
 		signal(SIGUSR2, low_bit);
-		signal(SIGTERM, complete);
-		signal(SIGINFO, char_recieved);
+		if (g_msg.c == SIG_STOP)
+			complete();
+		if (g_msg.byte_count == 8)
+			char_recieved();
 	}
 	return (EXIT_SUCCESS);
 }
