@@ -6,7 +6,7 @@
 /*   By: tschmitt <tschmitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 17:00:06 by tschmitt          #+#    #+#             */
-/*   Updated: 2021/08/29 15:05:09 by tschmitt         ###   ########.fr       */
+/*   Updated: 2021/08/29 21:05:24 by tschmitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	low_bit(int sig)
 
 void	char_recieved(void)
 {
-	ft_printf("%c", g_msg.c);
+	write(1, &g_msg.c, 1);
 	g_msg.c = 0;
 	g_msg.mask = 128;
 	g_msg.byte_count = 0;
